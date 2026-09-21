@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <!-- Boost Icon -->
+    <ImageView
+        android:id="@+id/gameIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_boost_large"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Game Name -->
+    <TextView
+        android:id="@+id/gameName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extreme Boost"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Boost Status -->
+    <TextView
+        android:id="@+id/boostStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ready to boost"
+        android:textColor="@color/accent_blue"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/boostProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_boost"
+        android:layout_marginBottom="48dp"
+        android:visibility="gone" />
+
+    <!-- Start Boost Button -->
+    <LinearLayout
+        android:id="@+id/startBoostButton"
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_button_boost"
+        android:gravity="center"
+        android:elevation="8dp"
+        android:layout_marginBottom="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BOOST NOW"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-bold"
+            android:letterSpacing="0.15" />
+    </LinearLayout>
+
+    <!-- Stats Container -->
+    <LinearLayout
+        android:id="@+id/statsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/bg_card"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BOOST RESULTS"
+            android:textColor="@color/accent_green"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-bold"
+            android:letterSpacing="0.15"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:background="@color/accent_blue"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/ramFreedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAM Freed: Calculating..."
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:background="@color/accent_green"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/processesKilledText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Processes: Optimized"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:background="@color/accent_purple"
+                android:layout_marginEnd="12dp" />
+
+            <TextView
+                android:id="@+id/fpsOptimizedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings: Optimized"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

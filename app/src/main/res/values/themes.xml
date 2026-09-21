@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GameBooster" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#FF0066FF</item>
+        <item name="colorPrimaryVariant">#FF0044CC</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">#FF00FF88</item>
+        <item name="colorSecondaryVariant">#FF00CC66</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor">#FF0D1117</item>
+        <item name="android:navigationBarColor">#FF0D1117</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+    </style>
+
+    <style name="BoostDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="colorAccent">#FF0066FF</item>
+    </style>
+
+    <style name="SuccessDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="colorAccent">#FF00CC66</item>
+    </style>
+
+    <style name="InfoDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="colorAccent">#FF8B5CF6</item>
+    </style>
+</resources>

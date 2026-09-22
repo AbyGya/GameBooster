@@ -105,7 +105,7 @@ class BoostActivity : AppCompatActivity() {
                 delay(1500); launchGame()
             } else {
                 startBtn.visibility = View.VISIBLE
-                (startBtn as? android.widget.LinearLayout)?.getChildAt(0) as? android.widget.TextView?.text = "⚡ BOOST AGAIN"
+                (startBtn as? android.widget.LinearLayout)?.getChildAt(0)?.let { (it as? android.widget.TextView)?.text = "⚡ BOOST AGAIN" }
             }
         }
     }

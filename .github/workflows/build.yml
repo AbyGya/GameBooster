@@ -43,7 +43,9 @@ jobs:
         export ANDROID_HOME=$ANDROID_SDK_ROOT
         export PATH="$ANDROID_HOME/platform-tools:$PATH"
         export JAVA_HOME=$JAVA_HOME
-        gradle assembleDebug --no-daemon --stacktrace
+        gradle clean assembleDebug --no-daemon --stacktrace --info 2>&1 | tail -50
+        echo "Build finished"
+        ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "No APK found"
 
     - name: Upload APK
       if: always()

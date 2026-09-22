@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.*
+import android.animation.ObjectAnimator
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +16,6 @@ import com.gamebooster.R
 import com.gamebooster.service.BoosterService
 import com.gamebooster.util.SystemUtils
 import kotlinx.coroutines.*
-import android.widget.ProgressBar
 
 class BoostActivity : AppCompatActivity() {
 

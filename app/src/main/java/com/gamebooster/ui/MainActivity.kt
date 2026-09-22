@@ -60,25 +60,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        ramProgress = findViewById(R.id.ramProgress)
-        cpuProgress = findViewById(R.id.cpuProgress)
-        storageProgress = findViewById(R.id.storageProgress)
-        batteryProgress = findViewById(R.id.batteryProgress)
+        ramProgress = findViewById<ProgressBar>(R.id.ramProgress)
+        cpuProgress = findViewById<ProgressBar>(R.id.cpuProgress)
+        storageProgress = findViewById<ProgressBar>(R.id.storageProgress)
+        batteryProgress = findViewById<ProgressBar>(R.id.batteryProgress)
 
-        ramText = findViewById(R.id.ramText)
-        cpuText = findViewById(R.id.cpuText)
-        storageText = findViewById(R.id.storageText)
-        batteryText = findViewById(R.id.batteryText)
-        tempText = findViewById(R.id.tempText)
+        ramText = findViewById<TextView>(R.id.ramText)
+        cpuText = findViewById<TextView>(R.id.cpuText)
+        storageText = findViewById<TextView>(R.id.storageText)
+        batteryText = findViewById<TextView>(R.id.batteryText)
+        tempText = findViewById<TextView>(R.id.tempText)
 
-        boostButton = findViewById(R.id.boostButton)
-        cleanButton = findViewById(R.id.cleanButton)
-        monitorButton = findViewById(R.id.monitorButton)
-        settingsButton = findViewById(R.id.settingsButton)
+        boostButton = findViewById<LinearLayout>(R.id.boostButton)
+        cleanButton = findViewById<LinearLayout>(R.id.cleanButton)
+        monitorButton = findViewById<LinearLayout>(R.id.monitorButton)
+        settingsButton = findViewById<LinearLayout>(R.id.settingsButton)
 
-        gamesRecyclerView = findViewById(R.id.gamesRecyclerView)
-        gamesTitle = findViewById(R.id.gamesTitle)
-        noGamesText = findViewById(R.id.noGamesText)
+        gamesRecyclerView = findViewById<RecyclerView>(R.id.gamesRecyclerView)
+        gamesTitle = findViewById<TextView>(R.id.gamesTitle)
+        noGamesText = findViewById<TextView>(R.id.noGamesText)
 
         gamesRecyclerView.layoutManager = GridLayoutManager(this, 3)
     }

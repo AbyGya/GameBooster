@@ -44,15 +44,15 @@ class BoostActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        gameIcon = findViewById(R.id.gameIcon)
-        gameName = findViewById(R.id.gameName)
-        boostStatus = findViewById(R.id.boostStatus)
-        boostProgress = findViewById(R.id.boostProgress)
-        startBoostButton = findViewById(R.id.startBoostButton)
-        statsContainer = findViewById(R.id.statsContainer)
-        ramFreedText = findViewById(R.id.ramFreedText)
-        processesKilledText = findViewById(R.id.processesKilledText)
-        fpsOptimizedText = findViewById(R.id.fpsOptimizedText)
+        gameIcon = findViewById<ImageView>(R.id.gameIcon)
+        gameName = findViewById<TextView>(R.id.gameName)
+        boostStatus = findViewById<TextView>(R.id.boostStatus)
+        boostProgress = findViewById<ProgressBar>(R.id.boostProgress)
+        startBoostButton = findViewById<LinearLayout>(R.id.startBoostButton)
+        statsContainer = findViewById<LinearLayout>(R.id.statsContainer)
+        ramFreedText = findViewById<TextView>(R.id.ramFreedText)
+        processesKilledText = findViewById<TextView>(R.id.processesKilledText)
+        fpsOptimizedText = findViewById<TextView>(R.id.fpsOptimizedText)
     }
 
     private fun setupUI() {

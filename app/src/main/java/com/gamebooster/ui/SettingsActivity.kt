@@ -1,6 +1,7 @@
 package com.gamebooster.ui
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import android.widget.SeekBar
 import android.widget.Switch
 import android.widget.TextView
@@ -19,7 +20,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Settings"

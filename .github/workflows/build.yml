@@ -25,8 +25,8 @@ jobs:
 
     - name: Install Android SDK
       run: |
-        sudo apt-get update -qq
-        sudo apt-get install -y -qq unzip wget curl lib32stdc++6 || true
+        sudo apt-get update -qq 2>/dev/null
+        sudo apt-get install -y -qq unzip wget curl 2>/dev/null || true
         mkdir -p $HOME/android-sdk/cmdline-tools/latest
         curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o /tmp/sdk.zip
         unzip -q /tmp/sdk.zip -d $HOME/android-sdk/cmdline-tools/latest
@@ -37,16 +37,16 @@ jobs:
         echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
         echo "Android SDK Complete"
-        echo "SDK location: $ANDROID_HOME"
-        ls "$ANDROID_HOME/platform-tools/" || echo "platform-tools not found"
-        ls "$ANDROID_HOME/cmdline-tools/latest/bin/" || echo "cmdline-tools not found"
+        which sdkmanager && echo "sdkmanager found"
+        which aapt && echo "aapt found"
+        which zipalign && echo "zipalign found"
 
     - name: Install Gradle
       run: |
         curl -sL "https://services.gradle.org/distributions/gradle-8.5-bin.zip" -o /tmp/gradle.zip
         unzip -q /tmp/gradle.zip -d /opt/
         echo "/opt/gradle-8.5/bin" >> $GITHUB_PATH
-        echo "Gradle Complete"
+        gradle --version
 
     - name: Build Debug APK
       run: |
@@ -54,7 +54,6 @@ jobs:
         export ANDROID_HOME=$HOME/android-sdk
         export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
         export JAVA_HOME=$JAVA_HOME
-        gradle --version
         gradle assembleDebug --no-daemon --stacktrace
 
     - name: Upload APK

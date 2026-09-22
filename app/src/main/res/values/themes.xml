@@ -32,9 +32,9 @@
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="colorAccent">#FF8B5CF6</item>
     </style>
-</resources>
 
     <style name="Widget.GameBooster.ProgressBar" parent="Widget.AppCompat.ProgressBar">
         <item name="color">@color/accent_cyan</item>
         <item name="indeterminateTint">@color/accent_cyan</item>
     </style>
+</resources>

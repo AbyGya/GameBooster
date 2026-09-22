@@ -15,9 +15,9 @@ class GameAdapter(
 ) : RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
 
     class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val gameIcon: ImageView = view.findViewById(R.id.gameIcon)
-        val gameName: TextView = view.findViewById(R.id.gameName)
-        val boostIndicator: View = view.findViewById(R.id.boostIndicator)
+        val gameIcon: ImageView = view.findViewById<ImageView>(R.id.gameIcon)
+        val gameName: TextView = view.findViewById<TextView>(R.id.gameName)
+        val boostIndicator: View = view.findViewById<View>(R.id.boostIndicator)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {

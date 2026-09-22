@@ -1,6 +1,7 @@
 package com.gamebooster.ui
 
 import android.Manifest
+import android.widget.Toast
 import android.app.AppOpsManager
 import android.content.Intent
 import android.content.pm.PackageManager

@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/bg_card"
+        android:background="@drawable/bg_glass_card"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -28,8 +28,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="12dp">
@@ -43,15 +43,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Auto Boost"
-                        android:textColor="@color/white"
+                        android:text="🔄 Auto Boost"
+                        android:textColor="@color/accent_white"
                         android:textSize="16sp"
                         android:fontFamily="sans-serif-medium" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Automatically boost when launching games"
+                        android:text="Auto-boost when launching games"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -61,15 +61,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:thumbTint="@color/accent_blue"
-                    android:trackTint="@color/bg_light" />
+                    android:trackTint="@color/bg_dark" />
             </LinearLayout>
 
-            <!-- Notifications -->
+            <!-- App Killer -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="12dp">
@@ -83,8 +83,48 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Block Notifications"
-                        android:textColor="@color/white"
+                        android:text="🗑️ Auto Kill Apps"
+                        android:textColor="@color/accent_white"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Auto-kill background apps on boost"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/killSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_red"
+                    android:trackTint="@color/bg_dark" />
+            </LinearLayout>
+
+            <!-- Block Notifications -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔕 Block Notifications"
+                        android:textColor="@color/accent_white"
                         android:textSize="16sp"
                         android:fontFamily="sans-serif-medium" />
 
@@ -101,15 +141,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:thumbTint="@color/accent_green"
-                    android:trackTint="@color/bg_light" />
+                    android:trackTint="@color/bg_dark" />
             </LinearLayout>
 
             <!-- Temperature Alert -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="12dp">
@@ -123,8 +163,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Temperature Alert"
-                        android:textColor="@color/white"
+                        android:text="🌡️ Temperature Alert"
+                        android:textColor="@color/accent_white"
                         android:textSize="16sp"
                         android:fontFamily="sans-serif-medium" />
 
@@ -140,24 +180,24 @@
                     android:id="@+id/temperatureSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:thumbTint="@color/temp_hot"
-                    android:trackTint="@color/bg_light" />
+                    android:thumbTint="@color/status_hot"
+                    android:trackTint="@color/bg_dark" />
             </LinearLayout>
 
-            <!-- Animation Scale -->
+            <!-- Performance Mode -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
-                android:padding="16dp"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
                 android:orientation="vertical"
                 android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Animation Scale"
-                    android:textColor="@color/white"
+                    android:text="⚡ Performance Mode"
+                    android:textColor="@color/accent_white"
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginBottom="4dp" />
@@ -165,7 +205,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lower animations = smoother gaming"
+                    android:text="Force high performance mode"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:layout_marginBottom="8dp" />
@@ -189,11 +229,51 @@
                     android:thumbTint="@color/accent_blue" />
             </LinearLayout>
 
+            <!-- Network -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass_card"
+                android:padding="18dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🌐 Network Optimizer"
+                        android:textColor="@color/accent_white"
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Optimize DNS for lower latency"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/networkSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_purple"
+                    android:trackTint="@color/bg_dark" />
+            </LinearLayout>
+
             <!-- App Info -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:padding="24dp"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -201,15 +281,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game Booster Extreme"
+                    android:text="Game Booster Ultra"
                     android:textColor="@color/accent_blue"
                     android:textSize="18sp"
-                    android:fontFamily="sans-serif-bold" />
+                    android:fontFamily="sans-serif-black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Version 1.0.0"
+                    android:text="Liquid Glass v2.0"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp" />

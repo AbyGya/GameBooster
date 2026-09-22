@@ -28,115 +28,119 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Game Booster"
+                    android:text="GAME BOOSTER"
                     android:textColor="@color/accent_blue"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.15" />
+                    android:letterSpacing="0.2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EXTREME"
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
+                    android:text="ULTRA"
+                    android:textColor="@color/accent_white"
+                    android:textSize="32sp"
                     android:fontFamily="sans-serif-black"
-                    android:letterSpacing="0.05" />
+                    android:letterSpacing="0.1" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_boost"
-                android:background="@drawable/bg_circle_accent"
-                android:padding="12dp"
-                android:layout_marginStart="8dp" />
+            <FrameLayout
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_glow_blue"
+                android:elevation="8dp"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_boost" />
+            </FrameLayout>
         </LinearLayout>
 
-        <!-- Status Cards -->
+        <!-- Stats Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="16dp">
 
-            <!-- RAM Card -->
+            <!-- RAM -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:padding="16dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginEnd="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="RAM"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.1" />
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.15" />
 
                 <ProgressBar
                     android:id="@+id/ramProgress"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.GameBooster.ProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:max="100"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progress_accent" />
+                    android:progressDrawable="@drawable/progress_glass" />
 
                 <TextView
                     android:id="@+id/ramText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textColor="@color/accent_silver"
+                    android:textSize="12sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
-            <!-- CPU Card -->
+            <!-- CPU -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:padding="16dp"
-                android:layout_marginStart="8dp">
+                android:layout_marginStart="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CPU"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.1" />
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.15" />
 
                 <ProgressBar
                     android:id="@+id/cpuProgress"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.GameBooster.ProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:max="100"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progress_green" />
+                    android:progressDrawable="@drawable/progress_glass" />
 
                 <TextView
                     android:id="@+id/cpuText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textColor="@color/accent_silver"
+                    android:textSize="12sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
         </LinearLayout>
@@ -145,77 +149,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="16dp">
 
-            <!-- Storage Card -->
+            <!-- Storage -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:padding="16dp"
-                android:layout_marginEnd="8dp">
+                android:layout_marginEnd="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="STORAGE"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.1" />
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.15" />
 
                 <ProgressBar
                     android:id="@+id/storageProgress"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.GameBooster.ProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:max="100"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progress_purple" />
+                    android:progressDrawable="@drawable/progress_glass" />
 
                 <TextView
                     android:id="@+id/storageText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Loading..."
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textColor="@color/accent_silver"
+                    android:textSize="12sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
-            <!-- Battery Card -->
+            <!-- Battery -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:padding="16dp"
-                android:layout_marginStart="8dp">
+                android:layout_marginStart="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BATTERY"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:letterSpacing="0.1" />
+                    android:textSize="10sp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.15" />
 
                 <ProgressBar
                     android:id="@+id/batteryProgress"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.GameBooster.ProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:max="100"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progress_battery" />
+                    android:progressDrawable="@drawable/progress_glass" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -228,8 +230,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Loading..."
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
+                        android:textColor="@color/accent_silver"
+                        android:textSize="12sp"
                         android:fontFamily="sans-serif-medium" />
 
                     <TextView
@@ -237,8 +239,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="--°C"
-                        android:textColor="@color/temp_normal"
-                        android:textSize="13sp"
+                        android:textColor="@color/status_normal"
+                        android:textSize="12sp"
                         android:fontFamily="sans-serif-bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -250,8 +252,8 @@
             android:layout_height="wrap_content"
             android:text="ACTIONS"
             android:textColor="@color/text_secondary"
-            android:textSize="11sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-bold"
             android:letterSpacing="0.15"
             android:layout_marginBottom="12dp" />
 
@@ -259,16 +261,16 @@
         <LinearLayout
             android:id="@+id/boostButton"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@drawable/bg_button_boost"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_boost_glass"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_marginBottom="12dp"
-            android:elevation="4dp">
+            android:elevation="8dp">
 
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
                 android:src="@drawable/ic_boost"
                 android:layout_marginEnd="12dp" />
 
@@ -276,29 +278,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EXTREME BOOST"
-                android:textColor="@color/white"
+                android:textColor="@color/accent_white"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif-bold"
+                android:fontFamily="sans-serif-black"
                 android:letterSpacing="0.1" />
         </LinearLayout>
 
-        <!-- Quick Actions -->
+        <!-- Quick Actions Grid -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="24dp">
 
-            <!-- Clean Button -->
+            <!-- Clean -->
             <LinearLayout
                 android:id="@+id/cleanButton"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginEnd="8dp">
+                android:layout_marginEnd="6dp">
 
                 <ImageView
                     android:layout_width="28dp"
@@ -308,20 +310,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quick Clean"
-                    android:textColor="@color/white"
+                    android:text="Clean"
+                    android:textColor="@color/accent_silver"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- Monitor Button -->
+            <!-- App Killer -->
             <LinearLayout
-                android:id="@+id/monitorButton"
+                android:id="@+id/killButton"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_marginStart="4dp"
@@ -330,39 +332,39 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_monitor" />
+                    android:src="@drawable/ic_app_kill" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Monitor"
-                    android:textColor="@color/white"
+                    android:text="Kill Apps"
+                    android:textColor="@color/accent_silver"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
 
-            <!-- Settings Button -->
+            <!-- Game Mode -->
             <LinearLayout
-                android:id="@+id/settingsButton"
+                android:id="@+id/gameModeButton"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginStart="8dp">
+                android:layout_marginStart="4dp">
 
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_settings" />
+                    android:src="@drawable/ic_game_mode" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"
-                    android:textColor="@color/white"
+                    android:text="Game Mode"
+                    android:textColor="@color/accent_silver"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="4dp" />
@@ -376,8 +378,8 @@
             android:layout_height="wrap_content"
             android:text="YOUR GAMES"
             android:textColor="@color/text_secondary"
-            android:textSize="11sp"
-            android:fontFamily="sans-serif-medium"
+            android:textSize="10sp"
+            android:fontFamily="sans-serif-bold"
             android:letterSpacing="0.15"
             android:layout_marginBottom="12dp" />
 

@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_dark">#FF0D1117</color>
-    <color name="bg_card">#FF161B22</color>
-    <color name="bg_light">#FF21262D</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Liquid Glass Silver Theme -->
+    <color name="bg_dark">#FF0A0E17</color>
+    <color name="bg_dark2">#FF0D1220</color>
+    <color name="bg_card">#FF151B2E</color>
+    <color name="bg_card_glass">#FF1A2236</color>
+    <color name="bg_light">#FF1E2640</color>
+    <color name="bg_input">#FF0F1525</color>
+    
+    <!-- Liquid Glass Silver Accents -->
+    <color name="accent_silver">#FFB8C4D4</color>
     <color name="accent_blue">#FF00D4FF</color>
-    <color name="accent_green">#FF00FF88</color>
+    <color name="accent_cyan">#FF00E5FF</color>
     <color name="accent_purple">#FF8B5CF6</color>
-    <color name="accent_red">#FFFF4444</color>
-    <color name="text_secondary">#FF8B949E</color>
-    <color name="temp_normal">#FF00FF88</color>
-    <color name="temp_warm">#FFFFB800</color>
-    <color name="temp_hot">#FFFF4444</color>
+    <color name="accent_green">#FF00FF88</color>
+    <color name="accent_red">#FFFF4466</color>
+    <color name="accent_orange">#FFFF8800</color>
+    <color name="accent_gold">#FFFFD700</color>
+    <color name="accent_white">#FFFFFFFF</color>
+    <color name="accent_warm">#FF2A3450</color>
+    
+    <!-- Glass effect colors -->
+    <color name="glass_bg">#1AFFFFFF</color>
+    <color name="glass_border">#2A3A5C</color>
+    <color name="glass_shadow">#0A0E17</color>
+    
+    <!-- Text colors -->
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FF8B9BB5</color>
+    <color name="text_hint">#FF4A5568</color>
+    
+    <!-- Status colors -->
+    <color name="status_normal">#FF00FF88</color>
+    <color name="status_warning">#FFFFD700</color>
+    <color name="status_hot">#FFFF4466</color>
+    <color name="status_cool">#FF00D4FF</color>
+    
+    <!-- Gradient colors -->
     <color name="gradient_start">#FF00D4FF</color>
-    <color name="gradient_end">#FF8B5CF6</color>
-    <color name="boost_start">#FF00D4FF</color>
-    <color name="boost_end">#FF00FF88</color>
+    <color name="gradient_center">#FF8B5CF6</color>
+    <color name="gradient_end">#FF00FF88</color>
+    <color name="boost_gradient_start">#FF00D4FF</color>
+    <color name="boost_gradient_end">#FF00FF88</color>
 </resources>

@@ -15,36 +15,24 @@ class GameAdapter(
 ) : RecyclerView.Adapter<GameAdapter.GameViewHolder>() {
 
     class GameViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val gameIcon: ImageView = view.findViewById<ImageView>(R.id.gameIcon)
-        val gameName: TextView = view.findViewById<TextView>(R.id.gameName)
-        val boostIndicator: View = view.findViewById<View>(R.id.boostIndicator)
+        val gameIcon: ImageView = view.findViewById(R.id.gameIcon)
+        val gameName: TextView = view.findViewById(R.id.gameName)
+        val boostIndicator: View = view.findViewById(R.id.boostIndicator)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_game, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false)
         return GameViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = games[position]
-
         holder.gameName.text = game.name
         game.icon?.let { holder.gameIcon.setImageDrawable(it) }
-
-        holder.itemView.setOnClickListener {
-            onGameClick(game)
-        }
-
-        // Add entrance animation
+        holder.itemView.setOnClickListener { onGameClick(game) }
         holder.itemView.alpha = 0f
         holder.itemView.translationY = 50f
-        holder.itemView.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(300)
-            .setStartDelay((position * 50).toLong())
-            .start()
+        holder.itemView.animate().alpha(1f).translationY(0f).setDuration(300).setStartDelay((position * 50).toLong()).start()
     }
 
     override fun getItemCount() = games.size

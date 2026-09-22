@@ -7,7 +7,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.app.usage.UsageStatsManager
 import androidx.core.app.NotificationCompat
 import com.gamebooster.GameBoosterApp
 import com.gamebooster.R
@@ -16,12 +15,10 @@ import com.gamebooster.util.SystemUtils
 import kotlinx.coroutines.*
 
 class BoosterService : Service() {
-
     companion object {
         const val ACTION_BOOST = "com.gamebooster.ACTION_BOOST"
         const val ACTION_STOP_BOOST = "com.gamebooster.ACTION_STOP_BOOST"
         const val EXTRA_GAME_PACKAGE = "game_package"
-
         private var isBoosting = false
         fun isRunning() = isBoosting
     }
@@ -29,17 +26,12 @@ class BoosterService : Service() {
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
     private var boostJob: Job? = null
 
-    override fun onBind(intent: Intent?): IBinder? = null
+    override fun onBind(intent: Intent?) = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
-            ACTION_BOOST -> {
-                val gamePackage = intent.getStringExtra(EXTRA_GAME_PACKAGE)
-                startBoost(gamePackage)
-            }
-            ACTION_STOP_BOOST -> {
-                stopBoost()
-            }
+            ACTION_BOOST -> startBoost(intent.getStringExtra(EXTRA_GAME_PACKAGE))
+            ACTION_STOP_BOOST -> stopBoost()
         }
         return START_STICKY
     }
@@ -47,81 +39,39 @@ class BoosterService : Service() {
     private fun startBoost(gamePackage: String?) {
         if (isBoosting) return
         isBoosting = true
-
-        startForeground(GameBoosterApp.NOTIFICATION_BOOST, createBoostNotification("Optimizing..."))
+        startForeground(GameBoosterApp.NOTIFICATION_BOOST, createNotification("⚡ Boosting..."))
 
         boostJob = scope.launch {
-            // Step 1: Kill background processes
             killBackgroundProcesses()
             delay(500)
-
-            // Step 2: Clean memory
             cleanMemory()
             delay(500)
-
-            // Step 3: Optimize system settings
-            optimizeSystem()
-
-            // Step 4: Launch game
-            if (gamePackage != null) {
-                delay(1000)
-                launchGame(gamePackage)
-            }
-
-            // Step 5: Continue monitoring
-            startContinuousBoost()
+            optimizePerformance()
+            if (gamePackage != null) { delay(1000); launchGame(gamePackage) }
+            while (isActive && isBoosting) { cleanMemory(); delay(5000) }
         }
     }
 
     private fun killBackgroundProcesses() {
-        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-
+        val am = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        am.killBackgroundProcesses(packageName)
         try {
-            val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-            val endTime = System.currentTimeMillis()
-            val beginTime = endTime - 60 * 1000
-
-            val stats = usageStatsManager.queryUsageStats(
-                UsageStatsManager.INTERVAL_DAILY, beginTime, endTime
-            )
-
-            val currentPackage = getCurrentForegroundPackage()
-
-            stats?.filter {
-                it.lastTimeUsed < System.currentTimeMillis() - 30000 &&
-                it.packageName != currentPackage &&
-                it.packageName != packageName
-            }?.forEach { stat ->
-                try {
-                    activityManager.killBackgroundProcesses(stat.packageName)
-                } catch (_: Exception) {}
-            }
-        } catch (_: Exception) {
-            // Fallback: kill common background processes
-            val commonBackground = listOf(
-                "com.google.android.gms", "com.google.android.apps.messaging",
-                "com.android.chrome", "com.google.android.googlequicksearchbox",
-                "com.samsung.android.app.spage", "com.sec.android.app.sbrowser"
-            )
-            commonBackground.forEach { pkg ->
-                try {
-                    activityManager.killBackgroundProcesses(pkg)
-                } catch (_: Exception) {}
-            }
-        }
+            val usm = getSystemService(Context.USAGE_STATS_SERVICE) as? android.app.usage.UsageStatsManager
+            usm?.queryUsageStats(android.app.usage.UsageStatsManager.INTERVAL_DAILY, System.currentTimeMillis() - 60000, System.currentTimeMillis())
+                ?.filter { it.lastTimeUsed < System.currentTimeMillis() - 30000 && it.packageName != packageName }
+                ?.take(20)?.forEach { try { am.killBackgroundProcesses(it.packageName) } catch (_: Exception) {} }
+        } catch (_: Exception) {}
     }
 
-    private fun cleanMemory() {
-        Runtime.getRuntime().gc()
-        System.runFinalization()
-    }
+    private fun cleanMemory() { Runtime.getRuntime().gc(); System.runFinalization() }
 
-    private fun optimizeSystem() {
-        // Reduce animation scale if possible
+    private fun optimizePerformance() {
         try {
             Runtime.getRuntime().exec(arrayOf("settings", "put", "global", "window_animation_scale", "0.5"))
             Runtime.getRuntime().exec(arrayOf("settings", "put", "global", "transition_animation_scale", "0.5"))
             Runtime.getRuntime().exec(arrayOf("settings", "put", "global", "animator_duration_scale", "0.5"))
+            Runtime.getRuntime().exec(arrayOf("settings", "put", "global", "background_process_limit", "2"))
+            Runtime.getRuntime().exec(arrayOf("settings", "put", "global", "screen_off_timeout", "600000"))
         } catch (_: Exception) {}
     }
 
@@ -131,56 +81,22 @@ class BoosterService : Service() {
         startActivity(intent)
     }
 
-    private fun startContinuousBoost() {
-        scope.launch {
-            while (isActive && isBoosting) {
-                cleanMemory()
-                delay(5000) // Clean every 5 seconds
-            }
-        }
-    }
-
-    private fun getCurrentForegroundPackage(): String? {
-        return try {
-            val usageStatsManager = getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-            val endTime = System.currentTimeMillis()
-            val beginTime = endTime - 1000
-
-            usageStatsManager.queryUsageStats(
-                UsageStatsManager.INTERVAL_DAILY, beginTime, endTime
-            )?.maxByOrNull { it.lastTimeUsed }?.packageName
-        } catch (_: Exception) {
-            null
-        }
-    }
-
-    private fun createBoostNotification(text: String): Notification {
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0,
-            Intent(this, MainActivity::class.java),
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
+    private fun createNotification(text: String): Notification {
+        val pi = PendingIntent.getActivity(this, 0, Intent(this, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
         return NotificationCompat.Builder(this, GameBoosterApp.CHANNEL_BOOST)
-            .setContentTitle("Game Booster Active")
+            .setContentTitle("⚡ Game Booster")
             .setContentText(text)
             .setSmallIcon(R.drawable.ic_boost)
-            .setContentIntent(pendingIntent)
-            .setOngoing(true)
-            .setSilent(true)
-            .build()
+            .setContentIntent(pi)
+            .setOngoing(true).setSilent(true).build()
     }
 
     private fun stopBoost() {
-        isBoosting = false
-        boostJob?.cancel()
-        stopForeground(STOP_FOREGROUND_REMOVE)
-        stopSelf()
+        isBoosting = false; boostJob?.cancel()
+        stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        isBoosting = false
-        scope.cancel()
+        super.onDestroy(); isBoosting = false; scope.cancel()
     }
 }

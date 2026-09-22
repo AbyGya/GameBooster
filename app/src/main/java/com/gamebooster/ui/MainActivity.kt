@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.app.ActivityManager
 import android.os.Process
 import android.os.Vibrator
 import android.provider.Settings

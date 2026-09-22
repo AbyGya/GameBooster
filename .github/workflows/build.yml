@@ -26,17 +26,20 @@ jobs:
     - name: Install Android SDK
       run: |
         sudo apt-get update -qq
-        sudo apt-get install -y -qq unzip wget curl lib32stdc++6 lib32z1
+        sudo apt-get install -y -qq unzip wget curl lib32stdc++6 || true
         mkdir -p $HOME/android-sdk/cmdline-tools/latest
         curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o /tmp/sdk.zip
         unzip -q /tmp/sdk.zip -d $HOME/android-sdk/cmdline-tools/latest
         export ANDROID_HOME=$HOME/android-sdk
         export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
         yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools" > /dev/null 2>&1
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools" > /dev/null 2>&1 || true
         echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
         echo "Android SDK Complete"
+        echo "SDK location: $ANDROID_HOME"
+        ls "$ANDROID_HOME/platform-tools/" || echo "platform-tools not found"
+        ls "$ANDROID_HOME/cmdline-tools/latest/bin/" || echo "cmdline-tools not found"
 
     - name: Install Gradle
       run: |

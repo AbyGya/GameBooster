@@ -142,19 +142,21 @@ object SystemUtils {
     fun getBatteryInfo(context: Context): BatteryInfo {
         val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
-        val level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-        val temperature = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_TEMPERATURE) / 10f
+        val level = batteryManager.getIntProperty(4) // BATTERY_PROPERTY_CAPACITY
+        val temperature = try { batteryManager.getIntProperty(2) / 10f } catch (_: Exception) { -1f } // TEMP
         val isCharging = batteryManager.isCharging
-        val voltage = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_VOLTAGE)
+        val voltage = try { batteryManager.getIntProperty(3) } catch (_: Exception) { 0 } // VOLTAGE
 
-        val health = when (batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS)) {
-            BatteryManager.BATTERY_STATUS_GOOD -> "Good"
-            BatteryManager.BATTERY_STATUS_OVERHEAT -> "Overheat"
-            BatteryManager.BATTERY_STATUS_DEAD -> "Dead"
-            BatteryManager.BATTERY_STATUS_OVER_VOLTAGE -> "Over Voltage"
-            BatteryManager.BATTERY_STATUS_UNSPECIFIED_FAILURE -> "Failure"
-            else -> "Unknown"
-        }
+        val health = try {
+            when (batteryManager.getIntProperty(1)) { // BATTERY_PROPERTY_STATUS
+                1 -> "Good"
+                2 -> "Overheat"
+                3 -> "Dead"
+                4 -> "Over Voltage"
+                5 -> "Failure"
+                else -> "Unknown"
+            }
+        } catch (_: Exception) { "Unknown" }
 
         return BatteryInfo(level, temperature, isCharging, health, voltage)
     }

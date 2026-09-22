@@ -13,8 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
       ANDROID_HOME: ${{ github.workspace }}/android-sdk
+      ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
 
     steps:
     - name: Checkout code
@@ -28,10 +28,14 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
-      with:
-        cmdline-tools: true
-        platforms: android-34
-        build-tools: 34.0.0
+
+    - name: Verify Android SDK
+      run: |
+        echo "ANDROID_HOME=$ANDROID_HOME"
+        echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+        ls -la $ANDROID_HOME/platform-tools/ || echo "platform-tools missing"
+        ls -la $ANDROID_HOME/build-tools/ || echo "build-tools missing"
+        sdkmanager --list 2>/dev/null | head -5 || echo "sdkmanager not found"
 
     - name: Install Gradle
       run: |
@@ -43,14 +47,12 @@ jobs:
     - name: Build Debug APK
       run: |
         set -x
-        echo "ANDROID_HOME=$ANDROID_HOME"
-        echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-        ls -la $ANDROID_HOME/platform-tools/ 2>/dev/null || echo "platform-tools not found"
-        ls -la $ANDROID_HOME/build-tools/ 2>/dev/null || echo "build-tools not found"
+        export ANDROID_HOME=${{ github.workspace }}/android-sdk
+        export ANDROID_SDK_ROOT=${{ github.workspace }}/android-sdk
         export PATH="$ANDROID_HOME/platform-tools:$PATH"
         export JAVA_HOME=$JAVA_HOME
-        gradle clean assembleDebug --no-daemon --stacktrace --info
-        echo "Build finished"
+        gradle clean assembleDebug --no-daemon --stacktrace
+        ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "No APK"
 
     - name: Upload APK
       if: always()

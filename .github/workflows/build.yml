@@ -31,30 +31,31 @@ jobs:
         curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o /tmp/sdk.zip
         unzip -q /tmp/sdk.zip -d $HOME/android-sdk/cmdline-tools/latest
         export ANDROID_HOME=$HOME/android-sdk
-        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>&1 | tail -1
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools" 2>&1 | tail -5
+        export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools" > /dev/null 2>&1
         echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
-        echo "Android SDK Setup Complete"
+        echo "Android SDK Complete"
 
     - name: Install Gradle
       run: |
         curl -sL "https://services.gradle.org/distributions/gradle-8.5-bin.zip" -o /tmp/gradle.zip
         unzip -q /tmp/gradle.zip -d /opt/
         echo "/opt/gradle-8.5/bin" >> $GITHUB_PATH
+        echo "Gradle Complete"
 
     - name: Build Debug APK
       run: |
+        set -x
         export ANDROID_HOME=$HOME/android-sdk
-        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
+        export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
         export JAVA_HOME=$JAVA_HOME
-        gradle assembleDebug --no-daemon 2>&1
-        ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "APK not found at expected path"
-        find app/build/outputs -name "*.apk" 2>/dev/null
+        gradle --version
+        gradle assembleDebug --no-daemon --stacktrace
 
     - name: Upload APK
-      if: success() || failure()
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: GameBooster-debug

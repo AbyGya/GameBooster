@@ -35,6 +35,5 @@
 
     <style name="Widget.GameBooster.ProgressBar" parent="Widget.AppCompat.ProgressBar">
         <item name="color">@color/accent_cyan</item>
-        <item name="indeterminateTint">@color/accent_cyan</item>
     </style>
 </resources>

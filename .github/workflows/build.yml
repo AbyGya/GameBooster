@@ -23,23 +23,22 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Install Android SDK
+    - name: Setup Android SDK
+      env:
+        ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
       run: |
-        sudo apt-get update -qq 2>/dev/null
-        sudo apt-get install -y -qq unzip wget curl 2>/dev/null || true
-        mkdir -p $HOME/android-sdk/cmdline-tools/latest
+        mkdir -p $ANDROID_SDK_ROOT/cmdline-tools/latest
         curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o /tmp/sdk.zip
-        unzip -q /tmp/sdk.zip -d $HOME/android-sdk/cmdline-tools/latest
-        export ANDROID_HOME=$HOME/android-sdk
+        unzip -q /tmp/sdk.zip -d $ANDROID_SDK_ROOT/cmdline-tools/
+        mv $ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools $ANDROID_SDK_ROOT/cmdline-tools/latest
+        export ANDROID_HOME=$ANDROID_SDK_ROOT
         export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null 2>&1 || true
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools" > /dev/null 2>&1 || true
-        echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" "platform-tools"
+        echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
         echo "$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
-        echo "Android SDK Complete"
-        which sdkmanager && echo "sdkmanager found"
-        which aapt && echo "aapt found"
-        which zipalign && echo "zipalign found"
+        echo "SDK ready"
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list | head -5
 
     - name: Install Gradle
       run: |
@@ -51,7 +50,7 @@ jobs:
     - name: Build Debug APK
       run: |
         set -x
-        export ANDROID_HOME=$HOME/android-sdk
+        export ANDROID_HOME=${{ github.workspace }}/android-sdk
         export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
         export JAVA_HOME=$JAVA_HOME
         gradle assembleDebug --no-daemon --stacktrace

@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcesses
 import android.os.Process
 import android.os.Vibrator
 import android.provider.Settings
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val am = getSystemService(ACTIVITY_SERVICE) as android.app.ActivityManager
             val runningApps = am.runningAppProcesses?.filter {
-                it.importance != ActivityManager.RunningAppProcesses.IMPORTANCE_FOREGROUND &&
+                it.importance != RunningAppProcesses.IMPORTANCE_FOREGROUND &&
                 it.processName != packageName
             } ?: emptyList()
             runningApps.forEach { am.killBackgroundProcesses(it.processName) }
